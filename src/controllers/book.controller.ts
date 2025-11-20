@@ -1,10 +1,23 @@
 import { Request, Response } from "express";
+import { z } from "zod";
 
-export type Book = {
-  id: string;
-  title: string;
-  date?: string;
-}
+export const BookSchema = z.object({
+  id: z.string().min(1, { message: "Book Id is required" }),
+  title: z.string().min(1, { message: "Book title is required" }),
+  date: z.string().optional()
+});
+
+export type Book = z.infer<typeof BookSchema>; // Typescript type from Zod schema
+
+// DTO - Data Transfer Object
+export const CreateBookDTO = BookSchema.pick({ id: true, title: true }); // what client sends to server
+export type CreateBookDTO = z.infer<typeof CreateBookDTO>;
+
+// export type Book = {
+//   id: string;
+//   title: string;
+//   date?: string;
+// }
 
 export const book: Book[] = [
   {
@@ -20,15 +33,24 @@ export const book: Book[] = [
 
 export class BookController {
   createBook = (req: Request, res: Response) => {
-    const { id, title } = req.body // destructing
+    const validation = CreateBookDTO.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({ errors: validation.error });
+    }
+
+    const { id, title } = validation.data; // destructing
+
+
+    // const { id, title } = req.body // destructing
     // const id: string = req.body.id;
 
-    if (!id) {
-      return res.status(400).json({ message: "BookID is required" });
-    }
-    if (!title) {
-      return res.status(400).json({ message: "Book Title is required" });
-    }
+    // if (!id) {
+    //   return res.status(400).json({ message: "BookID is required" });
+    // }
+    // if (!title) {
+    //   return res.status(400).json({ message: "Book Title is required" });
+    // }
+    
     const checkBook = book.find(elem => elem.id == id);    
     if (!checkBook) {
       return res.status(400).json({ message: "Book ID already exists" });
