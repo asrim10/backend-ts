@@ -6,9 +6,12 @@ const app: Application = express();
 const PORT: number = 3000;
 
 app.use(bodyParser.json());
+app.use("/api/books", bookRoutes);
 
-app.get("/api/books", bookRoutes);
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello, World!");
+});
 
 app.listen(PORT, () => {
-  console.log(`Server running at : http://localhost:${PORT}`);
+  console.log(`Server: http://localhost:${PORT}`);
 });
