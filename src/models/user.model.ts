@@ -25,6 +25,7 @@ export interface IUser extends UserType, Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
 export const UserModel = mongoose.model<IUser>("User", UserSchema);
 //UserModel is the mongoose model for User collection
 //db.users in MongoDB
