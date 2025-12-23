@@ -1,8 +1,12 @@
 import express, { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
-import bookRoutes from "./routes/book.route";
 import { connectDatabase } from "./database/mongodb";
 import { PORT } from "./config";
+
+import authRoutes from "./routes/auth.route";
+import bookRoutes from "./routes/book.route";
+
+import { HttpError } from "./errors/http-error";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -10,9 +14,12 @@ dotenv.config();
 console.log(process.env.PORT);
 
 const app: Application = express();
-// const PORT: number = 3000;
+// const PORT: number = 3000;`
 
 app.use(bodyParser.json());
+
+app.use("/api/auth", authRoutes);
+
 app.use("/api/books", bookRoutes);
 
 app.get("/", (req: Request, res: Response) => {
@@ -26,4 +33,3 @@ async function startServer() {
   });
 }
 startServer();
-``;
