@@ -6,8 +6,6 @@ import { PORT } from "./config";
 import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
 
-import { HttpError } from "./errors/http-error";
-
 import dotenv from "dotenv";
 dotenv.config();
 //can use .env variable below this
