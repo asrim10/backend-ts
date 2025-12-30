@@ -33,7 +33,8 @@ export class AdminUserService {
   }
   async getOneUser(id: string) {
     const user = await userRepository.getUserByID(id);
-    if (user) {
+    console.log(user);
+    if (!user) {
       throw new HttpError("User not found", 404);
     }
     return user;

@@ -5,6 +5,7 @@ import { PORT } from "./config";
 
 import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
+import authUserRoutes from "./routes/admin/user.route";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 
 app.use("/api/books", bookRoutes);
+app.use("/api/admin/users", authUserRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, World!");
