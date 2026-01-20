@@ -41,6 +41,7 @@ export class AuthController {
       }
       const loginData: LoginUserDTO = parsedData.data;
       const { token, user } = await userService.loginUser(loginData);
+      res.cookie("token", token);
       return res.status(200).json({
         success: true,
         message: "Login Successful",
