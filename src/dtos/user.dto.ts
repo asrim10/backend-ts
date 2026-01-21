@@ -12,7 +12,7 @@ export const CreateUserDTO = UserSchema.pick({
     //add new attribute
     {
       confirmPassword: z.string().min(6),
-    }
+    },
   )
   .refine(
     // extra validation for confimPassword
@@ -20,7 +20,7 @@ export const CreateUserDTO = UserSchema.pick({
     {
       message: "Password do not match",
       path: ["confimPassword"],
-    }
+    },
   );
 export type CreateUserDTO = z.infer<typeof CreateUserDTO>;
 
@@ -29,3 +29,6 @@ export const LoginUserDTO = z.object({
   password: z.string().min(6),
 });
 export type LoginUserDTO = z.infer<typeof LoginUserDTO>;
+
+export const UpdateUserDTO = UserSchema.partial();
+export type UpdateUserDTO = z.infer<typeof UpdateUserDTO>;

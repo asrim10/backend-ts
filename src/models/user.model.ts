@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { UserType } from "../types/user.type";
+import { string } from "zod";
 
 const UserSchema: Schema = new Schema<UserType>(
   {
@@ -13,10 +14,11 @@ const UserSchema: Schema = new Schema<UserType>(
       enum: ["user", "admin"],
       default: "user",
     },
+    imageUrl: { type: string, required: false },
   },
   {
     timestamps: true, // auto createdAt and updatedAt
-  }
+  },
 );
 
 export interface IUser extends UserType, Document {
