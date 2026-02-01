@@ -6,6 +6,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
 import authUserRoutes from "./routes/admin/user.route";
+import blogRoutes from "./routes/blog.route";
 
 import dotenv from "dotenv";
 import path from "path";
@@ -32,6 +33,7 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api/books", bookRoutes);
 app.use("/api/admin/users", authUserRoutes);
+app.use("/api/blogs", blogRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, World!");
