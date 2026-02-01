@@ -8,11 +8,15 @@ import bookRoutes from "./routes/book.route";
 import authUserRoutes from "./routes/admin/user.route";
 
 import dotenv from "dotenv";
+import path from "path";
 dotenv.config();
 //can use .env variable below this
 console.log(process.env.PORT);
 
 const app: Application = express();
+
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+
 let corsOptions = {
   origin: ["http://localhost:3000", "http://localhost:3005"],
   //which doamin can access your backend server
