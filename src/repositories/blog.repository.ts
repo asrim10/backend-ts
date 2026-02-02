@@ -31,8 +31,8 @@ export class BlogRepository implements IBlogRepository {
     }
     const total = await BlogModel.countDocuments(query);
     const blogs = await BlogModel.find(query)
-      .skip((page - 1) * size)
-      .limit(size)
+      .skip((page - 1) * size) // skip data
+      .limit(size) // limit how many data to show after skipping
       .populate("authorId", "username email");
     return { blogs, total };
   }

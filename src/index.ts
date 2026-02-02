@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
 import authUserRoutes from "./routes/admin/user.route";
 import blogRoutes from "./routes/blog.route";
+import adminBlogRoutes from "./routes/admin/blog.route";
 
 import dotenv from "dotenv";
 import path from "path";
@@ -34,6 +35,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/admin/users", authUserRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/admin/blogs", adminBlogRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, World!");
